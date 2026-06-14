@@ -1,6 +1,10 @@
 from db import create_tables
 from student import add_student, view_students, search_student
-from grade import add_grade, view_student_grades
+from grade import (
+    add_grade,
+    view_student_grades,
+    calculate_average
+)
 from tabulate import tabulate
 
 create_tables()
@@ -11,7 +15,8 @@ print("2. View Students")
 print("3. Search Student")
 print("4. Add Grade")
 print("5. View Student Grades")
-print("6. Exit")
+print("6. Calculate Average")
+print("7. Exit")
 
 choice = input("Choose: ")
 
@@ -70,7 +75,17 @@ elif choice == "5":
             tablefmt="grid"
         ))
     else:
-        print("No grades found for this student.")
+        print("No grades found.")
 
 elif choice == "6":
+    student_id = int(input("Enter Student ID: "))
+
+    average = calculate_average(student_id)
+
+    if average is not None:
+        print(f"\n📊 Average Grade: {average:.2f}")
+    else:
+        print("No grades found.")
+
+elif choice == "7":
     print("Goodbye!")

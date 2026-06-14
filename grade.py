@@ -35,3 +35,23 @@ def view_student_grades(student_id):
     connection.close()
 
     return grades
+
+
+def calculate_average(student_id):
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    query = """
+    SELECT AVG(grade)
+    FROM grades
+    WHERE student_id = %s
+    """
+
+    cursor.execute(query, (student_id,))
+
+    result = cursor.fetchone()
+
+    cursor.close()
+    connection.close()
+
+    return result[0]
