@@ -1,5 +1,10 @@
 from db import create_tables
-from student import add_student, view_students, search_student
+from student import (
+    add_student,
+    view_students,
+    search_student,
+    delete_student
+)
 from grade import (
     add_grade,
     view_student_grades,
@@ -18,7 +23,8 @@ while True:
     print("4. Add Grade")
     print("5. View Student Grades")
     print("6. Calculate Average")
-    print("7. Exit")
+    print("7. Delete Student")
+    print("8. Exit")
 
     choice = input("Choose: ")
 
@@ -90,6 +96,13 @@ while True:
             print("No grades found.")
 
     elif choice == "7":
+        student_id = int(input("Enter Student ID to delete: "))
+
+        delete_student(student_id)
+
+        print("✅ Student deleted successfully!")
+
+    elif choice == "8":
         print("👋 Goodbye!")
         break
 

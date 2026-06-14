@@ -50,3 +50,19 @@ def search_student(name):
     connection.close()
 
     return students
+
+
+def delete_student(student_id):
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    query = """
+    DELETE FROM students
+    WHERE id = %s
+    """
+
+    cursor.execute(query, (student_id,))
+    connection.commit()
+
+    cursor.close()
+    connection.close()
