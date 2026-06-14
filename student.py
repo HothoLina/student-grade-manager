@@ -1,5 +1,6 @@
 from db import get_connection
 
+
 def add_student(name, email):
     connection = get_connection()
     cursor = connection.cursor()
@@ -14,3 +15,19 @@ def add_student(name, email):
 
     cursor.close()
     connection.close()
+
+
+def view_students():
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    query = "SELECT * FROM students"
+
+    cursor.execute(query)
+
+    students = cursor.fetchall()
+
+    cursor.close()
+    connection.close()
+
+    return students
