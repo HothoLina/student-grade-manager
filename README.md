@@ -1,7 +1,9 @@
 # 🎓 Student Grade Manager System
 
-A Python + MySQL backend project that manages students and their grades using a full CRUD system with reporting and database relationships.
+## 📌 Project Overview
 
+This is a Python + MySQL backend system that manages students and their grades using a full CRUD architecture.  
+It includes reporting, relational database design, and error handling, structured in a professional modular format.
 ---
 
 ## 🚀 Features
@@ -116,15 +118,16 @@ Average Grade: 82.67
 Performance: Very Good
 
 
-💡 What I Learned
-Building a backend system from scratch
-Connecting Python with MySQL
-Designing relational databases
-CRUD operations
-Writing SQL queries
-Handling errors in real applications
-Structuring a full project like a developer
-👨‍💻 Author
+## 📚 What I Learned
+
+- Backend architecture design
+- Python MySQL integration
+- CRUD operations
+- Database relationships (Foreign Keys)
+- SQL aggregation (AVG)
+- Error handling in real applications
+- Modular project structure
+- Git & GitHub workflow
 
 Built by HothoLina as part of a backend development learning journey.
 
