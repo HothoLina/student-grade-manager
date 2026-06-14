@@ -1,17 +1,18 @@
-from db import create_tables
-from student import (
+from app.db import create_tables
+from app.models.student import (
     add_student,
     view_students,
     search_student,
     delete_student,
     update_student
 )
-from grade import (
+from app.models.grade import (
     add_grade,
     view_student_grades,
     calculate_average,
     generate_report
 )
+
 from tabulate import tabulate
 
 create_tables()

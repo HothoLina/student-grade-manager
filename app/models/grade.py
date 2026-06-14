@@ -1,4 +1,4 @@
-from db import get_connection
+from app.db import get_connection
 
 
 def add_grade(student_id, subject, grade):
