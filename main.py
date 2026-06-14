@@ -9,83 +9,89 @@ from tabulate import tabulate
 
 create_tables()
 
-print("===== Student Grade Manager =====")
-print("1. Add Student")
-print("2. View Students")
-print("3. Search Student")
-print("4. Add Grade")
-print("5. View Student Grades")
-print("6. Calculate Average")
-print("7. Exit")
+while True:
 
-choice = input("Choose: ")
+    print("\n===== Student Grade Manager =====")
+    print("1. Add Student")
+    print("2. View Students")
+    print("3. Search Student")
+    print("4. Add Grade")
+    print("5. View Student Grades")
+    print("6. Calculate Average")
+    print("7. Exit")
 
-if choice == "1":
-    name = input("Enter name: ")
-    email = input("Enter email: ")
+    choice = input("Choose: ")
 
-    add_student(name, email)
+    if choice == "1":
+        name = input("Enter name: ")
+        email = input("Enter email: ")
 
-    print("✅ Student added successfully!")
+        add_student(name, email)
 
-elif choice == "2":
-    students = view_students()
+        print("✅ Student added successfully!")
 
-    if students:
-        print(tabulate(
-            students,
-            headers=["ID", "Name", "Email"],
-            tablefmt="grid"
-        ))
+    elif choice == "2":
+        students = view_students()
+
+        if students:
+            print(tabulate(
+                students,
+                headers=["ID", "Name", "Email"],
+                tablefmt="grid"
+            ))
+        else:
+            print("No students found.")
+
+    elif choice == "3":
+        name = input("Enter student name: ")
+
+        students = search_student(name)
+
+        if students:
+            print(tabulate(
+                students,
+                headers=["ID", "Name", "Email"],
+                tablefmt="grid"
+            ))
+        else:
+            print("No matching students found.")
+
+    elif choice == "4":
+        student_id = int(input("Enter Student ID: "))
+        subject = input("Enter Subject: ")
+        grade = float(input("Enter Grade: "))
+
+        add_grade(student_id, subject, grade)
+
+        print("✅ Grade added successfully!")
+
+    elif choice == "5":
+        student_id = int(input("Enter Student ID: "))
+
+        grades = view_student_grades(student_id)
+
+        if grades:
+            print(tabulate(
+                grades,
+                headers=["Grade ID", "Subject", "Grade"],
+                tablefmt="grid"
+            ))
+        else:
+            print("No grades found.")
+
+    elif choice == "6":
+        student_id = int(input("Enter Student ID: "))
+
+        average = calculate_average(student_id)
+
+        if average is not None:
+            print(f"\n📊 Average Grade: {average:.2f}")
+        else:
+            print("No grades found.")
+
+    elif choice == "7":
+        print("👋 Goodbye!")
+        break
+
     else:
-        print("No students found.")
-
-elif choice == "3":
-    name = input("Enter student name: ")
-
-    students = search_student(name)
-
-    if students:
-        print(tabulate(
-            students,
-            headers=["ID", "Name", "Email"],
-            tablefmt="grid"
-        ))
-    else:
-        print("No matching students found.")
-
-elif choice == "4":
-    student_id = int(input("Enter Student ID: "))
-    subject = input("Enter Subject: ")
-    grade = float(input("Enter Grade: "))
-
-    add_grade(student_id, subject, grade)
-
-    print("✅ Grade added successfully!")
-
-elif choice == "5":
-    student_id = int(input("Enter Student ID: "))
-
-    grades = view_student_grades(student_id)
-
-    if grades:
-        print(tabulate(
-            grades,
-            headers=["Grade ID", "Subject", "Grade"],
-            tablefmt="grid"
-        ))
-    else:
-        print("No grades found.")
-
-elif choice == "6":
-    student_id = int(input("Enter Student ID: "))
-
-    average = calculate_average(student_id)
-
-    if average is not None:
-        print(f"\n📊 Average Grade: {average:.2f}")
-    else:
-        print("No grades found.")
-
-elif choice == "7":
-    print("Goodbye!")
+        print("❌ Invalid choice. Please try again.")
