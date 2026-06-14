@@ -1,5 +1,6 @@
 from db import create_tables
 from student import add_student, view_students
+from tabulate import tabulate
 
 create_tables()
 
@@ -21,9 +22,16 @@ if choice == "1":
 elif choice == "2":
     students = view_students()
 
-    print("\nStudents:")
-    for student in students:
-        print(student)
+    if students:
+        print(
+            tabulate(
+                students,
+                headers=["ID", "Name", "Email"],
+                tablefmt="grid"
+            )
+        )
+    else:
+        print("No students found.")
 
 elif choice == "3":
     print("Goodbye!")
