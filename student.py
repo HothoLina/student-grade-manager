@@ -31,3 +31,22 @@ def view_students():
     connection.close()
 
     return students
+
+
+def search_student(name):
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    query = """
+    SELECT * FROM students
+    WHERE name LIKE %s
+    """
+
+    cursor.execute(query, (f"%{name}%",))
+
+    students = cursor.fetchall()
+
+    cursor.close()
+    connection.close()
+
+    return students
