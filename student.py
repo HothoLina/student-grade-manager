@@ -5,16 +5,24 @@ def add_student(name, email):
     connection = get_connection()
     cursor = connection.cursor()
 
-    query = """
-    INSERT INTO students (name, email)
-    VALUES (%s, %s)
-    """
+    try:
+        query = """
+        INSERT INTO students (name, email)
+        VALUES (%s, %s)
+        """
+        cursor.execute(query, (name, email))
+        connection.commit()
+        print("✅ Student added successfully!")
 
-    cursor.execute(query, (name, email))
-    connection.commit()
+    except Exception as e:
+        if "Duplicate entry" in str(e):
+            print("❌ Error: Email already exists!")
+        else:
+            print("❌ Error:", e)
 
-    cursor.close()
-    connection.close()
+    finally:
+        cursor.close()
+        connection.close()
 
 
 def view_students():

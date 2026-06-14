@@ -9,7 +9,8 @@ from student import (
 from grade import (
     add_grade,
     view_student_grades,
-    calculate_average
+    calculate_average,
+    generate_report
 )
 from tabulate import tabulate
 
@@ -26,7 +27,8 @@ while True:
     print("6. Calculate Average")
     print("7. Delete Student")
     print("8. Update Student")
-    print("9. Exit")
+    print("9. Student Report")
+    print("10. Exit")
 
     choice = input("Choose: ")
 
@@ -35,8 +37,6 @@ while True:
         email = input("Enter email: ")
 
         add_student(name, email)
-
-        print("✅ Student added successfully!")
 
     elif choice == "2":
         students = view_students()
@@ -65,16 +65,19 @@ while True:
             print("No matching students found.")
 
     elif choice == "4":
-        student_id = int(input("Enter Student ID: "))
+        student_id = input("Enter Student ID: ")
         subject = input("Enter Subject: ")
-        grade = float(input("Enter Grade: "))
+
+        try:
+            grade = float(input("Enter Grade: "))
+        except:
+            print("❌ Invalid grade format!")
+            continue
 
         add_grade(student_id, subject, grade)
 
-        print("✅ Grade added successfully!")
-
     elif choice == "5":
-        student_id = int(input("Enter Student ID: "))
+        student_id = input("Enter Student ID: ")
 
         grades = view_student_grades(student_id)
 
@@ -88,7 +91,7 @@ while True:
             print("No grades found.")
 
     elif choice == "6":
-        student_id = int(input("Enter Student ID: "))
+        student_id = input("Enter Student ID: ")
 
         average = calculate_average(student_id)
 
@@ -98,14 +101,14 @@ while True:
             print("No grades found.")
 
     elif choice == "7":
-        student_id = int(input("Enter Student ID to delete: "))
+        student_id = input("Enter Student ID to delete: ")
 
         delete_student(student_id)
 
         print("✅ Student deleted successfully!")
 
     elif choice == "8":
-        student_id = int(input("Enter Student ID: "))
+        student_id = input("Enter Student ID: ")
         name = input("Enter New Name: ")
         email = input("Enter New Email: ")
 
@@ -114,6 +117,45 @@ while True:
         print("✅ Student updated successfully!")
 
     elif choice == "9":
+        student_id = input("Enter Student ID: ")
+
+        report = generate_report(student_id)
+
+        if report is None:
+            print("Student not found.")
+            continue
+
+        print("\n===== STUDENT REPORT =====")
+        print(f"Name: {report['name']}")
+        print(f"Email: {report['email']}")
+
+        print("\nSubjects:")
+
+        print(tabulate(
+            report["grades"],
+            headers=["Subject", "Grade"],
+            tablefmt="grid"
+        ))
+
+        average = report["average"]
+
+        if average is not None:
+            print(f"\nAverage Grade: {average:.2f}")
+
+            if average >= 90:
+                performance = "Excellent"
+            elif average >= 80:
+                performance = "Very Good"
+            elif average >= 70:
+                performance = "Good"
+            elif average >= 60:
+                performance = "Pass"
+            else:
+                performance = "Needs Improvement"
+
+            print(f"Performance: {performance}")
+
+    elif choice == "10":
         print("👋 Goodbye!")
         break
 
