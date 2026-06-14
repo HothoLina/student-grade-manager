@@ -3,7 +3,8 @@ from student import (
     add_student,
     view_students,
     search_student,
-    delete_student
+    delete_student,
+    update_student
 )
 from grade import (
     add_grade,
@@ -24,7 +25,8 @@ while True:
     print("5. View Student Grades")
     print("6. Calculate Average")
     print("7. Delete Student")
-    print("8. Exit")
+    print("8. Update Student")
+    print("9. Exit")
 
     choice = input("Choose: ")
 
@@ -103,6 +105,15 @@ while True:
         print("✅ Student deleted successfully!")
 
     elif choice == "8":
+        student_id = int(input("Enter Student ID: "))
+        name = input("Enter New Name: ")
+        email = input("Enter New Email: ")
+
+        update_student(student_id, name, email)
+
+        print("✅ Student updated successfully!")
+
+    elif choice == "9":
         print("👋 Goodbye!")
         break
 

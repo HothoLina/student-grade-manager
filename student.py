@@ -66,3 +66,21 @@ def delete_student(student_id):
 
     cursor.close()
     connection.close()
+
+
+def update_student(student_id, name, email):
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    query = """
+    UPDATE students
+    SET name = %s,
+        email = %s
+    WHERE id = %s
+    """
+
+    cursor.execute(query, (name, email, student_id))
+    connection.commit()
+
+    cursor.close()
+    connection.close()
